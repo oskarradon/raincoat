@@ -1,7 +1,6 @@
 var apiKey = "eef54fef4f484053c798c7b450ab75ab";
 
 document.addEventListener("DOMContentLoaded", function(event) {
-
 	getLocation().then((position) => {
 		console.log(position);
 		return position;
