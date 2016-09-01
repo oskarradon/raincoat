@@ -1,8 +1,5 @@
-# Bourbon Neat Jade SCSS Boilerplate
-This is a boilerplate for web projects using the Bourbon Neat grid framework, with SCSS, Jade, and a nice Gulp task to bring everything together.
-
-## Explaination
-The project is split into `src` and `dist` directories, `src` for the unminified Js, jade, and SCSS, and `dist` for the minified, autoprefixed versions of your code, the HTML, and the `assets` folder for images, PDFs, etc.
+# Should I Bring A Raincoat
+Simple app using the Open Weather API
 
 ## Set-up Instructions
 1. Make sure you have node and gulp globally installed
