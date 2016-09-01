@@ -17,14 +17,14 @@ body {
 .container {
 	@include outer-container;
 	// Set all the divs to be hidden except the loading message
-	.raining {
+	#raining {
 		display: none;
 	}
-	.no {
-		@extend .raining;
+	#no {
+		@extend #raining;
 	}
-	.location-error {
-		@extend .raining;
+	#location-error {
+		@extend #raining;
 	}
 }
 
