@@ -1,4 +1,4 @@
-# Should I Bring A Raincoat
+# Bring A Raincoat
 Simple app using the Open Weather API
 
 ## Set-up Instructions
