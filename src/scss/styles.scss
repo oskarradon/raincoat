@@ -23,6 +23,9 @@ body {
 	.no {
 		@extend .raining;
 	}
+	.location-error {
+		@extend .raining;
+	}
 }
 
 // These will be used to show and hide divs based on weather 
