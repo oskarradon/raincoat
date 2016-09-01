@@ -17,26 +17,7 @@ body {
 .container {
 	@include outer-container;
 	// Set all the divs to be hidden except the loading message
-	#raining {
+	#result {
 		display: none;
 	}
-	#no {
-		@extend #raining;
-	}
-	#location-error {
-		@extend #raining;
-	}
-	#weather-error {
-		@extend #raining;
-	}
-}
-
-// These will be used to show and hide divs based on weather 
-
-.showing {
-	display: block;
-}
-
-.hidden {
-	display: none;
 }
