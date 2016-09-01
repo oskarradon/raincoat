@@ -4,10 +4,12 @@ function getLocation () {
 		var latitude  = position.coords.latitude;
 		var longitude = position.coords.longitude;
 		console.log(latitude, longitude);
-		getWeather(latitude, longitude);
+		getWeather(latitude, longitude); // get weather
 	};
 	function error() {
 		//Couldn't find location
+  	document.getElementById('loading').classList.add('hidden');
+		document.getElementById('location-error').classList.add('showing');
 		console.log('GPS error')
 	};
 }
@@ -20,6 +22,9 @@ function getWeather (lat, long) {
 		if (request.status >= 200 && request.status < 400) {
 			var data = JSON.parse(request.responseText);
 			console.log(data);
+			// document.getElementById('loading').classList.add('hidden');
+			document.getElementById('raining').classList.add('showing');
+			console.log(document.getElementById('raining').classList)
 		} else {
 			// Couldnt get the weather
 			console.log('server error ', request.status)
