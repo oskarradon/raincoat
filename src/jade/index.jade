@@ -5,14 +5,16 @@ html
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 	body
 		div.container
-			div.loading
-				h1 Checking the weather...
-			div.raining
+			div#loading
+				h1 Checking the weather.
+			div#raining
 				h1 Yep, it's raining!
-			div.no
+			div#no
 				h1 Nah you should be good.
-			div.location-error
+			div#location-error
 				h1 Woah, couldn't find your location!
+			div#weather-error
+				h1 Couldn't get weather data! 
 	
 		footer
 			script(src="js/scripts.min.js")
