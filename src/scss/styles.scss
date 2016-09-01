@@ -1,0 +1,36 @@
+@import "bourbon";
+@import "_/grid-settings";
+@import "neat";
+
+
+$first-breakpoint-value: 400px;
+$second-breakpoint-value: 700px;
+
+$medium-viewport: new-breakpoint(min-width $first-breakpoint-value max-width $second-breakpoint-value);
+$large-viewport: new-breakpoint(min-width $second-breakpoint-value + 1);
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+.container {
+	@include outer-container;
+	// Set all the divs to be hidden except the loading message
+	.raining {
+		display: none;
+	}
+	.no {
+		@extend .raining;
+	}
+}
+
+// These will be used to show and hide divs based on weather 
+
+.showing {
+	display: block;
+}
+
+.hidden {
+	display: none;
+}
