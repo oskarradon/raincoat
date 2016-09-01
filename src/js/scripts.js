@@ -22,12 +22,12 @@ function geoLocate () {
 
 function callAPI (lat, long) {
 	var request = new XMLHttpRequest();
-	request.open('GET', 'api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&appid=' + apiKey, true);
+	request.open('GET', 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&appid=' + apiKey, true);
 
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
-			var response = request.responseText;
-			console.log(response);
+			var data = JSON.parse(request.responseText);
+			console.log(data);
 		} else {
 			console.log('server error ', request.status)
 		}
