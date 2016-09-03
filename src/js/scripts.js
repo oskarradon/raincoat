@@ -8,15 +8,15 @@ function displayResult(result) {
 
 function displayTemperatureNow(min, max, desc) {
 	document.getElementById('now').style.display = 'block';
-	document.querySelectorAll('#now .temps .low-temp')[0].innerHTML = min;
-	document.querySelectorAll('#now .temps .high-temp')[0].innerHTML = max;
+	document.querySelectorAll('#now .temps .low-temp')[0].innerHTML = min + "&#176;";
+	document.querySelectorAll('#now .temps .high-temp')[0].innerHTML = max + "&#176;";
 	document.querySelectorAll('#now .description')[0].innerHTML = desc;
 }
 
 function displayTemperatureLater(min, max, desc) {
 	document.getElementById('later').style.display = 'block';
-	document.querySelectorAll('#later .temps .low-temp')[0].innerHTML = min;
-	document.querySelectorAll('#later .temps .high-temp')[0].innerHTML = max;
+	document.querySelectorAll('#later .temps .low-temp')[0].innerHTML = min + "&#176;";
+	document.querySelectorAll('#later .temps .high-temp')[0].innerHTML = max + "&#176;";
 	document.querySelectorAll('#later .description')[0].innerHTML = desc;
 }
 
