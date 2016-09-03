@@ -11,6 +11,7 @@ function displayTemperatureNow(min, max, desc) {
 	document.querySelectorAll('#now .temps .low-temp')[0].innerHTML = min + "&#176;";
 	document.querySelectorAll('#now .temps .high-temp')[0].innerHTML = max + "&#176;";
 	document.querySelectorAll('#now .description')[0].innerHTML = desc;
+	document.querySelectorAll('#now img')[0].src = displayPicture(desc);
 }
 
 function displayTemperatureLater(min, max, desc) {
@@ -18,6 +19,7 @@ function displayTemperatureLater(min, max, desc) {
 	document.querySelectorAll('#later .temps .low-temp')[0].innerHTML = min + "&#176;";
 	document.querySelectorAll('#later .temps .high-temp')[0].innerHTML = max + "&#176;";
 	document.querySelectorAll('#later .description')[0].innerHTML = desc;
+	document.querySelectorAll('#later img')[0].src = displayPicture(desc);
 }
 
 function displayPicture(desc) {
