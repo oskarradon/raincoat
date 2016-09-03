@@ -42,11 +42,11 @@ function getWeather (lat, long) {
 			console.log(data);
 			if (data.list[0].weather[0].main === "Rain" || data.list[1].weather[0].main === "Rain" || data.list[2].weather[0].main === "Rain" ) {
 				displayResult("Yep, " + data.city.name + " weather isn't looking too good.");
-				let nowMin = convertTemp(data.list[0].main.temp_min);
-				let nowMax = convertTemp(data.list[0].main.temp_max);
+				let nowMin = toFahrenheit(data.list[0].main.temp_min);
+				let nowMax = toFahrenheit(data.list[0].main.temp_max);
 				let nowDesc = data.list[0].weather.description;
-				let laterMin = convertTemp(data.list[1].main.temp_min);
-				let laterMax = convertTemp(data.list[1].main.temp_max);
+				let laterMin = toFahrenheit(data.list[1].main.temp_min);
+				let laterMax = toFahrenheit(data.list[1].main.temp_max);
 				let laterDesc = data.list[1].weather.description;
 				displayTemperatureNow(nowMin, nowMax , nowDesc);
 				displayTemperatureLater(laterMin, laterMax, laterDesc);
@@ -61,8 +61,12 @@ function getWeather (lat, long) {
 	request.send();
 }
 
-function convertTemp (k) {
+function toFahrenheit (k) {
 	return Math.round(1.8 * (k - 273.15) + 32);
+}
+
+function toCelcius (k) {
+	return Math.round(k - 273.15);
 }
 
 getLocation();
