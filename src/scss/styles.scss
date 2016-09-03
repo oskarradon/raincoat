@@ -11,17 +11,34 @@ $large-viewport: new-breakpoint(min-width $second-breakpoint-value + 1);
 
 body {
 	margin: 0px;
-	padding: 0px;
+	padding: 40px;
 	background: linear-gradient(#6174FA, #B0E0FF);
 }
 
 .container {
 	font-family: 'Lato', 'Helvetica Neue', 'Arial', sans-serif;
 	@include outer-container;
-	#result {
-		display: none;
+}
+
+// hide everything on page load
+header, #intro, #loading, #result, .temp-tile {
+	display: none;
+}
+
+#intro {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	h1 {
+		font-size: 64px;
+		font-weight: 900;
 	}
-	.temp-tile {
-		display: none;
+	h4 {
+		font-size: 24px;
+		font-weight: 400;
+		width: 400px;
 	}
 }
