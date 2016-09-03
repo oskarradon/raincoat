@@ -49,9 +49,9 @@ function introAnimate() {
 	TweenMax.from(document.querySelectorAll('#intro div h4'), 1, {delay: 2, ease: Power4.easeIn, opacity: 0});
 	TweenMax.to(document.querySelectorAll('#intro div'), 1, {delay: 6, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
 	window.setTimeout(() => {
-		document.getElementById('intro').display = 'none';
+		document.getElementById('intro').style.display = 'none';
 		console.log('hide intro');
-	}, 6000);
+	}, 7000);
 }
 
 // Business Logic
