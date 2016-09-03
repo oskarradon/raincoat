@@ -20,6 +20,25 @@ function displayTemperatureLater(min, max, desc) {
 	document.querySelectorAll('#later .description')[0].innerHTML = desc;
 }
 
+function displayPicture(desc) {
+	let hours = new Date().getHours();
+	if (desc === "Rain" || desc === "Drizzle") {
+		return "../img/rain.png"
+	} else if (desc === "Snow") {
+		return "../img/snow.png"
+	} else if (desc === "Clouds") {
+		return "../img/clouds.png"
+	} else if (desc === "Thunderstorm") {
+		return "../img/thunder.png"
+	} else if (desc === "Clear" && (17 < hours > 5)) {
+		return "../img/moon.png" // only display moon between 5PM - 5AM
+	} else if (desc === "Clear") {
+		return "..img/sun.png"
+	} else {
+		return "../img/swirl.png"
+	}
+}
+
 // Business Logic
 
 function getLocation () {
@@ -39,7 +58,7 @@ function getWeather (lat, long) {
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			const data = JSON.parse(request.responseText);
-			console.log(data);
+			// console.log(data);
 			if (data.list[0].weather[0].main === "Rain" || data.list[1].weather[0].main === "Rain" || data.list[2].weather[0].main === "Rain" ) {
 				displayResult("Yep, " + data.city.name + " weather isn't looking too good.");
 				let nowMin = toFahrenheit(data.list[0].main.temp_min);
