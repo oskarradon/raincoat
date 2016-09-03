@@ -7,10 +7,32 @@ html
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 	body
 		div.container
+
 			div#loading
 				h1 Checking the weather...
+
 			div#result
-				h1#result-text 
+				h1#result-text
+
+			div.temp-tile#now
+				h4 Right now
+				img(src="")
+				h2.description
+				div.temps
+					p High
+					p Low
+					h5.high-temp
+					h5.low-temp
+
+			div.temp-tile#later
+				h4 Later
+				img(src="")
+				h2.description
+				div.temps
+					p High
+					p Low
+					h5.high-temp
+					h5.low-temp
 	
 		footer
 			script(src="js/scripts.min.js")
