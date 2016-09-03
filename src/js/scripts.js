@@ -41,6 +41,17 @@ function displayPicture(desc) {
 	}
 }
 
+// Animations
+
+function introAnimate() {
+	document.getElementById('intro').display = 'block';
+	TweenMax.from(document.querySelectorAll('#intro div h1'), 1, {ease: Power4.easeInOut, marginTop: '-40px', opacity: 0});
+	TweenMax.from(document.querySelectorAll('#intro div h4'), 1, {delay: 2, ease: Power4.easeInOut, marginTop: '-40px', opacity: 0});
+}
+
+introAnimate();
+
+
 // Business Logic
 
 function getLocation () {
@@ -91,3 +102,5 @@ function toCelcius (k) {
 }
 
 getLocation();
+
+// window.setTimeout(function, milliseconds);
