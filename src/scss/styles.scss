@@ -12,6 +12,7 @@ $large-viewport: new-breakpoint(min-width $second-breakpoint-value + 1);
 body {
 	margin: 0px;
 	padding: 0px;
+	background: linear-gradient(#6174FA, #B0E0FF);
 }
 
 .container {
