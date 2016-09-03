@@ -1,46 +1,63 @@
+// User Interface Logic
+
+function displayResult(result) {
+	document.getElementById('loading').style.display = 'none';
+	document.getElementById('result').style.display = 'block';
+	document.getElementById('result-text').innerHTML = result;
+}
+
+function displayTemperatureNow(min, max, desc) {
+	document.getElementById('now').style.display = 'block';
+	document.querySelectorAll('#now .temps .low-temp')[0].innerHTML = min;
+	document.querySelectorAll('#now .temps .high-temp')[0].innerHTML = max;
+	document.querySelectorAll('#now .description')[0].innerHTML = desc;
+}
+
+function displayTemperatureLater(min, max, desc) {
+	document.getElementById('later').style.display = 'block';
+	document.querySelectorAll('#later .temps .low-temp')[0].innerHTML = min;
+	document.querySelectorAll('#later .temps .high-temp')[0].innerHTML = max;
+	document.querySelectorAll('#later .description')[0].innerHTML = desc;
+}
+
+// Business Logic
+
 function getLocation () {
 	navigator.geolocation.getCurrentPosition(success, error);
 	function success(position) {
-		var latitude  = position.coords.latitude;
-		var longitude = position.coords.longitude;
-		getWeather(latitude, longitude); // get weather
+		getWeather(position.coords.latitude, position.coords.longitude);
 	};
 	function error() {
-		//Couldn't find location
-  	document.getElementById('loading').style.display = 'none';
-		document.getElementById('result').style.display = 'block';
-		document.getElementById('result-text').innerHTML = "Woah, couldn't find your location!"
+  	displayResult("Woah, couldn't find your location!");
 	};
 }
 
 function getWeather (lat, long) {
-	var apiKey = "eef54fef4f484053c798c7b450ab75ab";
-	var request = new XMLHttpRequest();
+	let apiKey = "eef54fef4f484053c798c7b450ab75ab";
+	let request = new XMLHttpRequest();
 	request.open('GET', 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + long + '&appid=' + apiKey, true);
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
-			var data = JSON.parse(request.responseText);
+			let data = JSON.parse(request.responseText);
 			console.log(data);
-			document.getElementById('loading').style.display = 'none';
-			document.getElementById('result').style.display = 'block';
-			console.log(data.list[0].weather[0].main )
 			if (data.list[0].weather[0].main === "Rain" || data.list[1].weather[0].main === "Rain" || data.list[2].weather[0].main === "Rain" ) {
-				document.getElementById('result-text').innerHTML = "Yep, " + data.city.name + " weather isn't looking too good."
+				displayResult("Yep, " + data.city.name + " weather isn't looking too good.");
+				console.log(data.list[0].main.temp_min)
+				displayTemperatureNow(data.list[0].main.temp_min, data.list[0].main.temp_max, data.list[0].weather.description);
+				displayTemperatureLater(data.list[1].main.temp_min, data.list[1].main.temp_max, data.list[1].weather.description);
 			}
 		} else {
-			document.getElementById('loading').style.display = 'none';
-			document.getElementById('result').style.display = 'block';
-			document.getElementById('result-text').innerHTML = "Whoops, couldn't check the weather."
-			console.log('server error ', request.status)
+			displayResult("Hmm, couldn't get any weather data.");
 		}
 	};
 	request.onerror = function() {
-		document.getElementById('loading').style.display = 'none';
-		document.getElementById('result').style.display = 'block';
-		document.getElementById('result-text').innerHTML = "Whoops, couldn't check the weather."
-		console.log('API connection error')
+		displayResult("Hmm, couldn't get any weather data.");
 	};
 	request.send();
 }
 
 getLocation();
+
+
+
+// 1.8 * (K - 273.15) + 32  convert kelvin to fahrenheit
