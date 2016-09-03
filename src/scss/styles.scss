@@ -20,10 +20,6 @@ body {
 	@include outer-container;
 }
 
-// hide everything on page load
-header, #intro, #loading, #result, .temp-tile {
-	display: none;
-}
 
 #intro {
 	width: 100%;
@@ -43,4 +39,26 @@ header, #intro, #loading, #result, .temp-tile {
 		width: 400px;
 		margin: 0;
 	}
+}
+
+header {
+	#logo {
+		float: left;
+		margin: 0;
+	}
+	#about {
+		float: right;
+		margin: 0;
+		&:hover {
+			color: white;
+			cursor: pointer;
+			transition: .5s;
+		}
+	}
+}
+
+
+// hide everything on page load
+header, #intro, #loading, #result, .temp-tile {
+	display: none;
 }

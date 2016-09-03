@@ -44,7 +44,7 @@ function displayPicture(desc) {
 // Animations
 
 function introAnimate() {
-	document.getElementById('intro').display = 'block';
+	document.getElementById('intro').style.display = 'flex';
 	TweenMax.from(document.querySelectorAll('#intro div h1'), 1, {delay: .5, ease: Power3.easeIn, marginTop: '-40px', opacity: 0});
 	TweenMax.from(document.querySelectorAll('#intro div h4'), 1, {delay: 2, ease: Power4.easeIn, opacity: 0});
 	TweenMax.to(document.querySelectorAll('#intro div'), 1, {delay: 6, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
@@ -52,6 +52,11 @@ function introAnimate() {
 		document.getElementById('intro').style.display = 'none';
 		console.log('hide intro');
 	}, 7000);
+}
+
+function headerAnimate() {
+	document.getElementsByTagName('header')[0].style.display = 'block';
+	TweenMax.from(document.getElementsByTagName('header'), 1, {ease: Power3.easeInOut, marginTop: '-100px'});
 }
 
 // Business Logic
@@ -104,4 +109,5 @@ function toCelcius (k) {
 
 
 introAnimate();
+window.setTimeout(headerAnimate, 7000);
 // window.setTimeout(getLocation, 7000);
