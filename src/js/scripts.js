@@ -29,7 +29,7 @@ function displayPicture(desc) {
 	} else if (desc === "Snow") {
 		return "../img/snow.png"
 	} else if (desc === "Clouds") {
-		return "../img/clouds.png"
+		return "../img/cloud.png"
 	} else if (desc === "Thunderstorm") {
 		return "../img/thunder.png"
 	} else if (desc === "Clear" && (17 < hours > 5)) {
