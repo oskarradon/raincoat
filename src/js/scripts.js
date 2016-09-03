@@ -33,21 +33,21 @@ function getLocation () {
 }
 
 function getWeather (lat, long) {
-	let apiKey = "eef54fef4f484053c798c7b450ab75ab";
-	let request = new XMLHttpRequest();
+	const apiKey = "eef54fef4f484053c798c7b450ab75ab";
+	const request = new XMLHttpRequest();
 	request.open('GET', 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + long + '&appid=' + apiKey, true);
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
-			let data = JSON.parse(request.responseText);
+			const data = JSON.parse(request.responseText);
 			console.log(data);
 			if (data.list[0].weather[0].main === "Rain" || data.list[1].weather[0].main === "Rain" || data.list[2].weather[0].main === "Rain" ) {
 				displayResult("Yep, " + data.city.name + " weather isn't looking too good.");
 				let nowMin = toFahrenheit(data.list[0].main.temp_min);
 				let nowMax = toFahrenheit(data.list[0].main.temp_max);
-				let nowDesc = data.list[0].weather.description;
+				let nowDesc = data.list[0].weather[0].main;
 				let laterMin = toFahrenheit(data.list[1].main.temp_min);
 				let laterMax = toFahrenheit(data.list[1].main.temp_max);
-				let laterDesc = data.list[1].weather.description;
+				let laterDesc = data.list[1].weather[0].main;
 				displayTemperatureNow(nowMin, nowMax , nowDesc);
 				displayTemperatureLater(laterMin, laterMax, laterDesc);
 			}
