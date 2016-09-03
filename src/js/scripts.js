@@ -23,7 +23,7 @@ function displayTemperatureLater(min, max, desc) {
 }
 
 function displayPicture(desc) {
-	let hours = new Date().getHours();
+	const hours = new Date().getHours();
 	if (desc === "Rain" || desc === "Drizzle") {
 		return "../img/rain.png"
 	} else if (desc === "Snow") {
@@ -45,12 +45,14 @@ function displayPicture(desc) {
 
 function introAnimate() {
 	document.getElementById('intro').display = 'block';
-	TweenMax.from(document.querySelectorAll('#intro div h1'), 1, {ease: Power4.easeInOut, marginTop: '-40px', opacity: 0});
-	TweenMax.from(document.querySelectorAll('#intro div h4'), 1, {delay: 2, ease: Power4.easeInOut, marginTop: '-40px', opacity: 0});
+	TweenMax.from(document.querySelectorAll('#intro div h1'), 1, {delay: .5, ease: Power3.easeIn, marginTop: '-40px', opacity: 0});
+	TweenMax.from(document.querySelectorAll('#intro div h4'), 1, {delay: 2, ease: Power4.easeIn, opacity: 0});
+	TweenMax.to(document.querySelectorAll('#intro div'), 1, {delay: 6, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
+	window.setTimeout(() => {
+		document.getElementById('intro').display = 'none';
+		console.log('hide intro');
+	}, 6000);
 }
-
-introAnimate();
-
 
 // Business Logic
 
@@ -71,15 +73,14 @@ function getWeather (lat, long) {
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			const data = JSON.parse(request.responseText);
-			// console.log(data);
 			if (data.list[0].weather[0].main === "Rain" || data.list[1].weather[0].main === "Rain" || data.list[2].weather[0].main === "Rain" ) {
 				displayResult("Yep, " + data.city.name + " weather isn't looking too good.");
-				let nowMin = toFahrenheit(data.list[0].main.temp_min);
-				let nowMax = toFahrenheit(data.list[0].main.temp_max);
-				let nowDesc = data.list[0].weather[0].main;
-				let laterMin = toFahrenheit(data.list[1].main.temp_min);
-				let laterMax = toFahrenheit(data.list[1].main.temp_max);
-				let laterDesc = data.list[1].weather[0].main;
+				const nowMin = toFahrenheit(data.list[0].main.temp_min);
+				const nowMax = toFahrenheit(data.list[0].main.temp_max);
+				const nowDesc = data.list[0].weather[0].main;
+				const laterMin = toFahrenheit(data.list[1].main.temp_min);
+				const laterMax = toFahrenheit(data.list[1].main.temp_max);
+				const laterDesc = data.list[1].weather[0].main;
 				displayTemperatureNow(nowMin, nowMax , nowDesc);
 				displayTemperatureLater(laterMin, laterMax, laterDesc);
 			}
@@ -101,6 +102,6 @@ function toCelcius (k) {
 	return Math.round(k - 273.15);
 }
 
-getLocation();
 
-// window.setTimeout(function, milliseconds);
+introAnimate();
+// window.setTimeout(getLocation, 7000);
