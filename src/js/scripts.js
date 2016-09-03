@@ -42,9 +42,14 @@ function getWeather (lat, long) {
 			console.log(data);
 			if (data.list[0].weather[0].main === "Rain" || data.list[1].weather[0].main === "Rain" || data.list[2].weather[0].main === "Rain" ) {
 				displayResult("Yep, " + data.city.name + " weather isn't looking too good.");
-				console.log(data.list[0].main.temp_min)
-				displayTemperatureNow(data.list[0].main.temp_min, data.list[0].main.temp_max, data.list[0].weather.description);
-				displayTemperatureLater(data.list[1].main.temp_min, data.list[1].main.temp_max, data.list[1].weather.description);
+				let nowMin = convertTemp(data.list[0].main.temp_min);
+				let nowMax = convertTemp(data.list[0].main.temp_max);
+				let nowDesc = data.list[0].weather.description;
+				let laterMin = convertTemp(data.list[1].main.temp_min);
+				let laterMax = convertTemp(data.list[1].main.temp_max);
+				let laterDesc = data.list[1].weather.description;
+				displayTemperatureNow(nowMin, nowMax , nowDesc);
+				displayTemperatureLater(laterMin, laterMax, laterDesc);
 			}
 		} else {
 			displayResult("Hmm, couldn't get any weather data.");
@@ -56,8 +61,8 @@ function getWeather (lat, long) {
 	request.send();
 }
 
+function convertTemp (k) {
+	return Math.round(1.8 * (k - 273.15) + 32);
+}
+
 getLocation();
-
-
-
-// 1.8 * (K - 273.15) + 32  convert kelvin to fahrenheit
