@@ -17,8 +17,10 @@ body {
 .container {
 	font-family: 'Muli', 'Helvetica Neue', 'Arial', sans-serif;
 	@include outer-container;
-	// Set all the divs to be hidden except the loading message
 	#result {
+		display: none;
+	}
+	.temp-tile {
 		display: none;
 	}
 }
