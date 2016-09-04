@@ -8,16 +8,16 @@ function displayResult(result) {
 
 function displayTemperatureNow(min, max, desc) {
 	document.getElementById('now').style.display = 'block';
-	document.querySelectorAll('#now .temps .low-temp')[0].innerHTML = min + "&#176;";
-	document.querySelectorAll('#now .temps .high-temp')[0].innerHTML = max + "&#176;";
+	document.querySelectorAll('#now .low-temp h4')[0].innerHTML = min + "&#176;";
+	document.querySelectorAll('#now .high-temp h4')[0].innerHTML = max + "&#176;";
 	document.querySelectorAll('#now .description')[0].innerHTML = desc;
 	document.querySelectorAll('#now img')[0].src = displayPicture(desc);
 }
 
 function displayTemperatureLater(min, max, desc) {
 	document.getElementById('later').style.display = 'block';
-	document.querySelectorAll('#later .temps .low-temp')[0].innerHTML = min + "&#176;";
-	document.querySelectorAll('#later .temps .high-temp')[0].innerHTML = max + "&#176;";
+	document.querySelectorAll('#later .low-temp h4')[0].innerHTML = min + "&#176;";
+	document.querySelectorAll('#later .high-temp h4')[0].innerHTML = max + "&#176;";
 	document.querySelectorAll('#later .description')[0].innerHTML = desc;
 	document.querySelectorAll('#later img')[0].src = displayPicture(desc);
 }
@@ -63,6 +63,11 @@ function loadingAnimate() {
 	TweenMax.from(document.getElementById('loading'), 1, {ease: Power4.easeOut, opacity: 0, marginTop: '-40px'});
 }
 
+document.getElementById('about').addEventListener("click", aboutAnimate); 
+
+function aboutAnimate() {
+	document.getElementsByTagName('body')[0].style.background = 'linear-gradient(#FFCB00, #FF6666)';
+};
 
 
 // Business Logic
