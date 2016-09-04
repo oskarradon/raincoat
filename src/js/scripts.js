@@ -118,4 +118,4 @@ function toCelcius (k) {
 introAnimate();
 window.setTimeout(headerAnimate, 7000);
 window.setTimeout(loadingAnimate, 7500);
-// window.setTimeout(getLocation, 7000);
+window.setTimeout(getLocation, 7000);
