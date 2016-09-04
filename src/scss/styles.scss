@@ -3,11 +3,8 @@
 @import "neat";
 
 
-$first-breakpoint-value: 400px;
-$second-breakpoint-value: 700px;
-
-$medium-viewport: new-breakpoint(min-width $first-breakpoint-value max-width $second-breakpoint-value);
-$large-viewport: new-breakpoint(min-width $second-breakpoint-value + 1);
+$breakpoint-value: 500px;
+$lg: new-breakpoint(min-width $breakpoint-value);
 
 body {
 	margin: 0px;
@@ -29,19 +26,29 @@ body {
 	justify-content: center;
 	text-align: center;
 	h1 {
-		font-size: 64px;
 		font-weight: 900;
 		margin: 0 0 5px;
+		@include media($lg) {
+			font-size: 52px;
+		}
 	}
 	h4 {
-		font-size: 24px;
 		font-weight: 400;
-		width: 400px;
 		margin: 0;
+		width: 200px;
+		@include media($lg) {
+			font-size: 24px;
+			width: 300px;
+			line-height: 2rem;
+		}
 	}
 }
 
 header {
+	font-size: 12px;
+	@include media($lg) {
+		font-size: 16px;
+	}
 	#logo {
 		float: left;
 		margin: 0;
@@ -57,6 +64,14 @@ header {
 	}
 }
 
+#loading {
+	@include span-columns(12);
+	text-align: center;
+	padding: 20vh 0;
+	@media (min-height: 800px) {
+		padding: 30vh 0;
+	}
+}
 
 // hide everything on page load
 header, #intro, #loading, #result, .temp-tile {
