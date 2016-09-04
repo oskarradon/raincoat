@@ -66,7 +66,16 @@ function loadingAnimate() {
 document.getElementById('about').addEventListener("click", aboutAnimate); 
 
 function aboutAnimate() {
-	document.getElementsByTagName('body')[0].style.background = 'linear-gradient(#FFCB00, #FF6666)';
+	if (document.getElementById('about').classList[0] != 'active') {
+		document.getElementById('about').classList.add('active');
+		document.getElementById('credit').style.display = 'block';
+		TweenMax.to(document.getElementById('bg'), 1, {ease: Power4.easeOut, top: '0px'});
+		TweenMax.to(document.getElementById('credit'), 2, {ease: Power4.easeOut, opacity: 1, top: '80px'});
+	} else {
+		document.getElementById('about').classList.remove('active');
+		TweenMax.to(document.getElementById('bg'), 1, {ease: Power4.easeOut, top: '-200vh'});
+		TweenMax.to(document.getElementById('credit'), 2, {ease: Power4.easeOut, opacity: 0, top: '0px'});
+	}
 };
 
 
