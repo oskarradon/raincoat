@@ -77,7 +77,54 @@ header {
 	@extend #loading;
 }
 
+.temp-tile {
+	@include span-columns(6);
+	@include omega(2n);
+	padding-top: 4vh;
+	text-align: center;
+	@include media($lg) {
+		@include span-columns(3);
+	}
+	@media (min-height: 600px) {
+		padding-top: 15vh;
+	}
+	img {
+		width: 40px;
+		@include media($lg) {
+			width: 80px;
+		}
+	}
+	h4 {
+		font-weight: normal;
+		font-size: 12px;
+	}
+	.description {
+		font-size: 18px;
+		@include media($lg) {
+			font-size: 24px;
+		}
+	}
+	.high-temp p, .low-temp p {
+		font-size: 12px;
+	}
+	.high-temp, .low-temp {
+		display: none;
+	} 
+}
+
+#now {
+	@include media($lg) {
+		@include shift(3);
+	}
+}
+
+// #later {
+// }
+
 // hide everything on page load
 header, #intro, #loading, #result, .temp-tile {
 	display: none;
 }
+//  #intro, #result{
+// 	display: none;
+// }
