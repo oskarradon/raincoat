@@ -45,7 +45,7 @@ function displayPicture(desc) {
 
 function introAnimate() {
 	document.getElementById('intro').style.display = 'flex';
-	TweenMax.from(document.querySelectorAll('#intro div h1'), 1, {delay: .5, ease: Power3.easeIn, marginTop: '-40px', opacity: 0});
+	TweenMax.from(document.querySelectorAll('#intro div h1'), 1.5, {delay: .5, ease: Power1.easeIn, marginTop: '-60px', opacity: 0});
 	TweenMax.from(document.querySelectorAll('#intro div h4'), 1, {delay: 2, ease: Power4.easeIn, opacity: 0});
 	TweenMax.to(document.querySelectorAll('#intro div'), 1, {delay: 6, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
 	window.setTimeout(() => {
@@ -56,7 +56,7 @@ function introAnimate() {
 
 function headerAnimate() {
 	document.getElementsByTagName('header')[0].style.display = 'block';
-	TweenMax.from(document.getElementsByTagName('header'), 1, {ease: Power3.easeInOut, marginTop: '-100px'});
+	TweenMax.from(document.getElementsByTagName('header'), 1, {ease: Power3.easeInOut, marginTop: '-80px'});
 }
 
 // Business Logic
