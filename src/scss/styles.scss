@@ -9,7 +9,17 @@ $lg: new-breakpoint(min-width $breakpoint-value);
 body {
 	margin: 0px;
 	padding: 40px;
-	background: linear-gradient(#6174FA, #B0E0FF);
+	overflow: hidden;
+}
+
+#bg {
+	width: 100vw;
+	height: 300vh;
+	background: linear-gradient(#FFCB00, #FF6666, #6174FA, #B0E0FF);
+	position: absolute;
+	top: -200vh;
+	left: 0px;
+	z-index: -9;
 }
 
 .container {
@@ -20,7 +30,7 @@ body {
 
 #intro {
 	width: 100%;
-	height: 100%;
+	height: calc(100vh - 80px);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -79,7 +89,7 @@ header {
 
 .temp-tile {
 	@include span-columns(6);
-	@include omega(2n);
+	@include omega(n);
 	padding-top: 4vh;
 	text-align: center;
 	@include media($lg) {
