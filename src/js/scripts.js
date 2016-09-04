@@ -60,8 +60,8 @@ function headerAnimate() {
 }
 
 function loadingAnimate() {
-	document.getElementById('result').style.display = 'block';
-	TweenMax.from(document.getElementById('result'), 1, {ease: Power4.easeOut, opacity: 0, marginTop: '-40px'});
+	document.getElementById('loading').style.display = 'block';
+	TweenMax.from(document.getElementById('loading'), 1, {ease: Power4.easeOut, opacity: 0, marginTop: '-40px'});
 }
 
 
