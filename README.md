@@ -1,5 +1,5 @@
-# Bring A Raincoat
-Simple app using the Open Weather API
+# Raincoat.io
+Simple app using the Open Weather and geolocation APIs and GSAP animations
 
 ## Set-up Instructions
 1. Make sure you have node and gulp globally installed
