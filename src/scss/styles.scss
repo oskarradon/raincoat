@@ -10,6 +10,7 @@ body {
 	margin: 0px;
 	padding: 40px;
 	overflow: hidden;
+	font-family: 'Lato', 'Helvetica Neue', 'Arial', sans-serif;
 }
 
 #bg {
@@ -22,8 +23,32 @@ body {
 	z-index: -9;
 }
 
+#credit {
+	position: absolute;
+	display: none;
+	text-align: center;
+	opacity: 0;
+	top: -40px;
+	left: 0px;
+	@include span-columns(12);
+	h1 {
+		font-weight: 400;
+		font-size: 16px;
+	}
+	a {
+		color: black;
+		text-decoration: none;
+	&:hover {
+		color: white;
+		transition: 1s;
+	}
+	&:visited {
+		color: black;
+	}
+	}
+}
+
 .container {
-	font-family: 'Lato', 'Helvetica Neue', 'Arial', sans-serif;
 	@include outer-container;
 }
 
@@ -72,6 +97,11 @@ header {
 			transition: .5s;
 		}
 	}
+}
+
+// for about button
+.active {
+	color: white;
 }
 
 #loading {
