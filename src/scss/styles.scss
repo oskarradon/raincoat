@@ -73,6 +73,10 @@ header {
 	}
 }
 
+#result{
+	@extend #loading;
+}
+
 // hide everything on page load
 header, #intro, #loading, #result, .temp-tile {
 	display: none;
