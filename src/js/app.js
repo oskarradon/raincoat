@@ -50,7 +50,6 @@ function introAnimate() {
 	TweenMax.to(document.querySelectorAll('#intro div'), 1, {delay: 6, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
 	window.setTimeout(() => {
 		document.getElementById('intro').style.display = 'none';
-		console.log('hide intro');
 	}, 7000);
 }
 
