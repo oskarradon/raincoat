@@ -59,6 +59,13 @@ function headerAnimate() {
 	TweenMax.from(document.getElementsByTagName('header'), 1, {ease: Power3.easeInOut, marginTop: '-80px'});
 }
 
+function loadingAnimate() {
+	document.getElementById('result').style.display = 'block';
+	TweenMax.from(document.getElementById('result'), 1, {ease: Power4.easeOut, opacity: 0, marginTop: '-40px'});
+}
+
+
+
 // Business Logic
 
 function getLocation () {
@@ -110,4 +117,5 @@ function toCelcius (k) {
 
 introAnimate();
 window.setTimeout(headerAnimate, 7000);
+window.setTimeout(loadingAnimate, 7500);
 // window.setTimeout(getLocation, 7000);
