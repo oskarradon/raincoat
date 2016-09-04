@@ -67,9 +67,9 @@ header {
 #loading {
 	@include span-columns(12);
 	text-align: center;
-	padding: 20vh 0;
+	padding: 20vh 0 0;
 	@media (min-height: 800px) {
-		padding: 30vh 0;
+		padding: 30vh 0 0;
 	}
 }
 
