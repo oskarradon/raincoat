@@ -84,6 +84,11 @@ header {
 	@include media($lg) {
 		font-size: 16px;
 	}
+	h1:hover {
+		color: white;
+		cursor: pointer;
+		transition: .5s;
+	}
 	#logo {
 		float: left;
 		margin: 0;
@@ -91,17 +96,7 @@ header {
 	#about {
 		float: right;
 		margin: 0;
-		&:hover {
-			color: white;
-			cursor: pointer;
-			transition: .5s;
-		}
 	}
-}
-
-// for about button
-.active {
-	color: white;
 }
 
 #loading {
