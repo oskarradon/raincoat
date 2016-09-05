@@ -1,4 +1,61 @@
+
+// Initialize animations
+introAnimate();
+window.setTimeout(headerAnimate, 7000);
+window.setTimeout(loadingAnimate, 7500);
+document.getElementById('about').addEventListener("click", aboutAnimate); 
+window.setTimeout(getLocation, 7000);
+
+// Used to toggle temperature animations
+let width = window.innerWidth
+|| document.documentElement.clientWidth
+|| document.body.clientWidth;
+
+window.addEventListener("resize", function(){
+  width = window.innerWidth
+	|| document.documentElement.clientWidth
+	|| document.body.clientWidth;
+	console.log(width);
+});
+
+
 // User Interface Logic
+
+
+// Animations
+
+function introAnimate() {
+	document.getElementById('intro').style.display = 'flex';
+	TweenMax.from(document.querySelectorAll('#intro div h1'), 1.5, {delay: .5, ease: Power1.easeIn, marginTop: '-60px', opacity: 0});
+	TweenMax.from(document.querySelectorAll('#intro div h4'), 1, {delay: 2, ease: Power4.easeIn, opacity: 0});
+	TweenMax.to(document.querySelectorAll('#intro div'), 1, {delay: 6, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
+	window.setTimeout(() => {
+		document.getElementById('intro').style.display = 'none';
+	}, 7000);
+}
+
+function headerAnimate() {
+	document.getElementsByTagName('header')[0].style.display = 'block';
+	TweenMax.from(document.getElementsByTagName('header'), 1, {ease: Power3.easeInOut, marginTop: '-80px'});
+}
+
+function loadingAnimate() {
+	document.getElementById('loading').style.display = 'block';
+	TweenMax.from(document.getElementById('loading'), 1, {ease: Power4.easeOut, opacity: 0, marginTop: '-40px'});
+}
+
+function aboutAnimate() {
+	if (document.getElementById('about').classList[0] != 'active') {
+		document.getElementById('about').classList.add('active');
+		document.getElementById('credit').style.display = 'block';
+		TweenMax.to(document.getElementById('bg'), 1, {ease: Power4.easeOut, top: '0px'});
+		TweenMax.to(document.getElementById('credit'), 2, {ease: Power4.easeOut, opacity: 1, top: '80px'});
+	} else {
+		document.getElementById('about').classList.remove('active');
+		TweenMax.to(document.getElementById('bg'), 1, {ease: Power4.easeOut, top: '-200vh'});
+		TweenMax.to(document.getElementById('credit'), 2, {ease: Power4.easeOut, opacity: 0, top: '0px'});
+	}
+};
 
 function displayResult(result) {
 	document.getElementById('loading').style.display = 'none';
@@ -41,43 +98,6 @@ function displayPicture(desc) {
 	}
 }
 
-// Animations
-
-function introAnimate() {
-	document.getElementById('intro').style.display = 'flex';
-	TweenMax.from(document.querySelectorAll('#intro div h1'), 1.5, {delay: .5, ease: Power1.easeIn, marginTop: '-60px', opacity: 0});
-	TweenMax.from(document.querySelectorAll('#intro div h4'), 1, {delay: 2, ease: Power4.easeIn, opacity: 0});
-	TweenMax.to(document.querySelectorAll('#intro div'), 1, {delay: 6, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
-	window.setTimeout(() => {
-		document.getElementById('intro').style.display = 'none';
-	}, 7000);
-}
-
-function headerAnimate() {
-	document.getElementsByTagName('header')[0].style.display = 'block';
-	TweenMax.from(document.getElementsByTagName('header'), 1, {ease: Power3.easeInOut, marginTop: '-80px'});
-}
-
-function loadingAnimate() {
-	document.getElementById('loading').style.display = 'block';
-	TweenMax.from(document.getElementById('loading'), 1, {ease: Power4.easeOut, opacity: 0, marginTop: '-40px'});
-}
-
-document.getElementById('about').addEventListener("click", aboutAnimate); 
-
-function aboutAnimate() {
-	if (document.getElementById('about').classList[0] != 'active') {
-		document.getElementById('about').classList.add('active');
-		document.getElementById('credit').style.display = 'block';
-		TweenMax.to(document.getElementById('bg'), 1, {ease: Power4.easeOut, top: '0px'});
-		TweenMax.to(document.getElementById('credit'), 2, {ease: Power4.easeOut, opacity: 1, top: '80px'});
-	} else {
-		document.getElementById('about').classList.remove('active');
-		TweenMax.to(document.getElementById('bg'), 1, {ease: Power4.easeOut, top: '-200vh'});
-		TweenMax.to(document.getElementById('credit'), 2, {ease: Power4.easeOut, opacity: 0, top: '0px'});
-	}
-};
-
 
 // Business Logic
 
@@ -85,6 +105,7 @@ function getLocation () {
 	navigator.geolocation.getCurrentPosition(success, error);
 	function success(position) {
 		getWeather(position.coords.latitude, position.coords.longitude);
+		console.log(position.coords.latitude, position.coords.longitude);
 	};
 	function error() {
   	displayResult("Woah, couldn't find your location!");
@@ -98,6 +119,7 @@ function getWeather (lat, long) {
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			const data = JSON.parse(request.responseText);
+			console.log(data);
 			if (data.list[0].weather[0].main === "Rain" || data.list[1].weather[0].main === "Rain" || data.list[2].weather[0].main === "Rain" ) {
 				displayResult("Yep, " + data.city.name + " weather isn't looking too good.");
 				const nowMin = toFahrenheit(data.list[0].main.temp_min);
@@ -128,7 +150,3 @@ function toCelcius (k) {
 }
 
 
-introAnimate();
-window.setTimeout(headerAnimate, 7000);
-window.setTimeout(loadingAnimate, 7500);
-window.setTimeout(getLocation, 7000);
