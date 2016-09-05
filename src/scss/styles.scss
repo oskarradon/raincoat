@@ -139,11 +139,21 @@ header {
 			font-size: 24px;
 		}
 	}
-	.high-temp p, .low-temp p {
-		font-size: 12px;
-	}
 	.high-temp, .low-temp {
 		display: none;
+		width: 80px;
+		margin: 0 auto;
+		p {
+			font-size: 12px;
+			float: left;
+			margin: 0;
+		}
+		h4 {
+			font-weight: 900;
+			font-size: 18px;
+			float: right;
+			margin: -4px 0 0;
+		}
 	} 
 }
 
