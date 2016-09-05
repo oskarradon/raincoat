@@ -130,7 +130,7 @@ function displayPicture(desc) {
 		return "../img/cloud.png"
 	} else if (desc === "Thunderstorm") {
 		return "../img/thunder.png"
-	} else if (desc === "Clear" && (17 < hours > 5)) {
+	} else if (desc === "Clear" && (5 < hours < 17)) {
 		return "../img/moon.png" // only display moon between 5PM - 5AM
 	} else if (desc === "Clear") {
 		return "../img/sun.png"
