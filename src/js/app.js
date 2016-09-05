@@ -7,18 +7,6 @@ document.getElementById('about').addEventListener("click", aboutAnimate);
 document.getElementById('logo').addEventListener("click", () => {location.reload()}); 
 window.setTimeout(getLocation, 7000);
 
-// Used to toggle temperature animations
-let width = window.innerWidth
-|| document.documentElement.clientWidth
-|| document.body.clientWidth;
-
-window.addEventListener("resize", function(){
-  width = window.innerWidth
-	|| document.documentElement.clientWidth
-	|| document.body.clientWidth;
-	console.log(width);
-});
-
 // Temperature conversions
 function toFahrenheit (k) {
 	return Math.round(1.8 * (k - 273.15) + 32);
@@ -86,42 +74,28 @@ function resultAnimate(data) {
 }
 
 function temperatureTilesShow(data) {
-	const nowMin = toFahrenheit(data.list[0].main.temp_min);
-	const nowMax = toFahrenheit(data.list[0].main.temp_max);
+	const nowTemp = toFahrenheit(data.list[0].main.temp);
 	const nowDesc = data.list[0].weather[0].main;
-	const laterMin = toFahrenheit(data.list[2].main.temp_min);
-	const laterMax = toFahrenheit(data.list[2].main.temp_max);
-	const laterDesc = data.list[2].weather[0].main;
-	temperatureNowAnimate(nowMin, nowMax, nowDesc);
-	temperatureLaterAnimate(nowMin, nowMax, nowDesc);
+	const laterTemp = toFahrenheit(data.list[1].main.temp);
+	const laterDesc = data.list[1].weather[0].main;
+	temperatureNowAnimate(nowTemp, nowDesc);
+	temperatureLaterAnimate(nowTemp, nowDesc);
 }
 
-function temperatureNowAnimate(min, max, desc) {
+function temperatureNowAnimate(temp, desc) {
 	document.getElementById('now').style.display = 'block';
-	document.querySelectorAll('#now .low-temp h4')[0].innerHTML = min + '&#176;';
-	document.querySelectorAll('#now .high-temp h4')[0].innerHTML = max + '&#176;';
 	document.querySelectorAll('#now .description')[0].innerHTML = desc;
 	document.querySelectorAll('#now img')[0].src = displayPicture(desc);
+	document.querySelectorAll('#now .temp')[0].innerHTML = temp + '&#176;';
 	TweenMax.from(document.getElementById('now'), 1, {delay: 3, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
-	nowLoop.play();
 }
 
-let nowLoop = new TimelineMax({repeat: -1});
-nowLoop.add( document.querySelectorAll('#now .low-temp')[0].style.display = 'block' );
-nowLoop.add( TweenMax.from(document.querySelectorAll('#now .low-temp'), 1, {delay: 2, ease: Power4.easeOut, opacity: 0,	marginTop: '-10px'}) );
-nowLoop.add( TweenMax.to(document.querySelectorAll('#now .low-temp'), 1, {delay: 3, ease: Power4.easeOut, opacity: 0,	marginTop: '-10px'}) );
-// nowLoop.add( document.querySelectorAll('#now .low-temp')[0].style.display = 'none' );
-
-
-
-function temperatureLaterAnimate(min, max, desc) {
+function temperatureLaterAnimate(temp, desc) {
 	document.getElementById('later').style.display = 'block';	
-	document.querySelectorAll('#later .low-temp h4')[0].innerHTML = min + '&#176;';
-	document.querySelectorAll('#later .high-temp h4')[0].innerHTML = max + '&#176;';
 	document.querySelectorAll('#later .description')[0].innerHTML = desc;
 	document.querySelectorAll('#later img')[0].src = displayPicture(desc);
+	document.querySelectorAll('#later .temp')[0].innerHTML = temp + '&#176;';
 	TweenMax.from(document.getElementById('later'), 1, {delay: 4, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
-	// temperatureLaterLoop();
 }
 
 function displayPicture(desc) {
@@ -150,7 +124,7 @@ function getLocation () {
 	navigator.geolocation.getCurrentPosition(success, error);
 	function success(position) {
 		getWeather(position.coords.latitude, position.coords.longitude);
-		console.log(position.coords.latitude, position.coords.longitude);
+		// console.log(position.coords.latitude, position.coords.longitude);
 	};
 	function error() {
   	displayResult(null);
@@ -164,7 +138,7 @@ function getWeather (lat, long) {
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			const data = JSON.parse(request.responseText);
-			console.log(data);
+			// console.log(data);
 			resultAnimate(data);	
 			temperatureTilesShow(data);
 		} else {
