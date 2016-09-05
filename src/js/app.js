@@ -2,7 +2,7 @@
 // Initialize animations
 introAnimate();
 window.setTimeout(headerAnimate, 7000);
-window.setTimeout(loadingAnimate, 7500);
+window.setTimeout(loadingShow, 7500);
 document.getElementById('about').addEventListener("click", aboutAnimate); 
 window.setTimeout(getLocation, 7000);
 
@@ -39,9 +39,16 @@ function headerAnimate() {
 	TweenMax.from(document.getElementsByTagName('header'), 1, {ease: Power3.easeInOut, marginTop: '-80px'});
 }
 
-function loadingAnimate() {
+function loadingShow() {
 	document.getElementById('loading').style.display = 'block';
 	TweenMax.from(document.getElementById('loading'), 1, {ease: Power4.easeOut, opacity: 0, marginTop: '-40px'});
+}
+
+function loadingHide() {
+	TweenMax.to(document.getElementById('loading'), 1, {ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
+	window.setTimeout(() => {
+		document.getElementById('loading').style.display = 'none';
+	}, 2000);
 }
 
 function aboutAnimate() {
@@ -57,10 +64,31 @@ function aboutAnimate() {
 	}
 };
 
-function displayResult(result) {
-	document.getElementById('loading').style.display = 'none';
-	document.getElementById('result').style.display = 'block';
-	document.getElementById('result-text').innerHTML = result;
+function resultAnimate(result) {
+	loadingHide();
+	window.setTimeout(() => {
+		document.getElementById('result').style.display = 'block';
+		document.getElementById('result-text').innerHTML = 'Yep, ' + result.city.name + ' weather isn\'t looking too good';
+	}, 2000);
+	TweenMax.from(document.getElementById('result'), 1, {delay: 2, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
+}
+
+
+// const nowMin = toFahrenheit(data.list[0].main.temp_min);
+// const nowMax = toFahrenheit(data.list[0].main.temp_max);
+// const nowDesc = data.list[0].weather[0].main;
+// const laterMin = toFahrenheit(data.list[1].main.temp_min);
+// const laterMax = toFahrenheit(data.list[1].main.temp_max);
+// const laterDesc = data.list[1].weather[0].main;
+
+// if (data.list[0].weather[0].main === "Rain" || data.list[1].weather[0].main === "Rain" || data.list[2].weather[0].main === "Rain" ) {}
+
+function toFahrenheit (k) {
+	return Math.round(1.8 * (k - 273.15) + 32);
+}
+
+function toCelcius (k) {
+	return Math.round(k - 273.15);
 }
 
 function displayTemperatureNow(min, max, desc) {
@@ -120,33 +148,15 @@ function getWeather (lat, long) {
 		if (request.status >= 200 && request.status < 400) {
 			const data = JSON.parse(request.responseText);
 			console.log(data);
-			if (data.list[0].weather[0].main === "Rain" || data.list[1].weather[0].main === "Rain" || data.list[2].weather[0].main === "Rain" ) {
-				displayResult("Yep, " + data.city.name + " weather isn't looking too good.");
-				const nowMin = toFahrenheit(data.list[0].main.temp_min);
-				const nowMax = toFahrenheit(data.list[0].main.temp_max);
-				const nowDesc = data.list[0].weather[0].main;
-				const laterMin = toFahrenheit(data.list[1].main.temp_min);
-				const laterMax = toFahrenheit(data.list[1].main.temp_max);
-				const laterDesc = data.list[1].weather[0].main;
-				displayTemperatureNow(nowMin, nowMax , nowDesc);
-				displayTemperatureLater(laterMin, laterMax, laterDesc);
-			}
+			resultAnimate(data);	
+			// displayTemperatureNow(data);
+			// displayTemperatureLater(data);
 		} else {
-			displayResult("Hmm, couldn't get any weather data.");
+			displayResult(null);
 		}
 	};
 	request.onerror = function() {
-		displayResult("Hmm, couldn't get any weather data.");
+		displayResult(null);
 	};
 	request.send();
 }
-
-function toFahrenheit (k) {
-	return Math.round(1.8 * (k - 273.15) + 32);
-}
-
-function toCelcius (k) {
-	return Math.round(k - 273.15);
-}
-
-
