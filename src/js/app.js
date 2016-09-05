@@ -98,34 +98,24 @@ function temperatureTilesShow(data) {
 
 function temperatureNowAnimate(min, max, desc) {
 	document.getElementById('now').style.display = 'block';
-	document.querySelectorAll('#now .high-temp')[0].style.display = 'block';
 	document.querySelectorAll('#now .low-temp h4')[0].innerHTML = min + '&#176;';
 	document.querySelectorAll('#now .high-temp h4')[0].innerHTML = max + '&#176;';
 	document.querySelectorAll('#now .description')[0].innerHTML = desc;
 	document.querySelectorAll('#now img')[0].src = displayPicture(desc);
 	TweenMax.from(document.getElementById('now'), 1, {delay: 3, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
-	window.setInterval(() => {temperatureNowLoop();}, 1000);
+	nowLoop.play();
 }
 
-function temperatureNowLoop() {
-	TweenMax.to(document.querySelectorAll('#now .high-temp'), 1, {delay: 4, ease: Power4.easeOut, opacity: 0,	marginTop: '-10px'});
-	window.setTimeout(() => {
-		document.querySelectorAll('#now .high-temp')[0].style.display = 'none';
-		document.querySelectorAll('#now .low-temp')[0].style.display = 'block';
-	}, 5000);
-	TweenMax.from(document.querySelectorAll('#now .low-temp'), 1, {delay: 6, ease: Power4.easeOut, opacity: 0,	marginBottom: '-10px'});
-	// TweenMax.to(document.querySelectorAll('#now .low-temp'), 1, {delay: 4, ease: Power4.easeOut, opacity: 0,	marginTop: '-10px'});
-	// window.setTimeout(() => {
-	// 	document.querySelectorAll('#now .low-temp')[0].style.display = 'none';
-	// 	document.querySelectorAll('#now .high-temp')[0].style.display = 'block';
-	// 	temperatureNowLoop();
-	// }, 5000);
-}
-	// document.querySelectorAll('#now .high-temp')[0].style.display = 'block';
+let nowLoop = new TimelineMax({repeat: -1});
+nowLoop.add( document.querySelectorAll('#now .low-temp')[0].style.display = 'block' );
+nowLoop.add( TweenMax.from(document.querySelectorAll('#now .low-temp'), 1, {delay: 2, ease: Power4.easeOut, opacity: 0,	marginTop: '-10px'}) );
+nowLoop.add( TweenMax.to(document.querySelectorAll('#now .low-temp'), 1, {delay: 3, ease: Power4.easeOut, opacity: 0,	marginTop: '-10px'}) );
+// nowLoop.add( document.querySelectorAll('#now .low-temp')[0].style.display = 'none' );
+
+
 
 function temperatureLaterAnimate(min, max, desc) {
-	document.getElementById('later').style.display = 'block';
-	document.querySelectorAll('#later .high-temp')[0].style.display = 'block';
+	document.getElementById('later').style.display = 'block';	
 	document.querySelectorAll('#later .low-temp h4')[0].innerHTML = min + '&#176;';
 	document.querySelectorAll('#later .high-temp h4')[0].innerHTML = max + '&#176;';
 	document.querySelectorAll('#later .description')[0].innerHTML = desc;
