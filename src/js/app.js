@@ -85,39 +85,53 @@ function resultAnimate(data) {
 	TweenMax.from(document.getElementById('result'), 1, {delay: 2, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
 }
 
-function temperaturesAnimate(data) {
+function temperatureTilesShow(data) {
 	const nowMin = toFahrenheit(data.list[0].main.temp_min);
 	const nowMax = toFahrenheit(data.list[0].main.temp_max);
 	const nowDesc = data.list[0].weather[0].main;
-	const laterMin = toFahrenheit(data.list[1].main.temp_min);
-	const laterMax = toFahrenheit(data.list[1].main.temp_max);
-	const laterDesc = data.list[1].weather[0].main;
+	const laterMin = toFahrenheit(data.list[2].main.temp_min);
+	const laterMax = toFahrenheit(data.list[2].main.temp_max);
+	const laterDesc = data.list[2].weather[0].main;
 	temperatureNowAnimate(nowMin, nowMax, nowDesc);
 	temperatureLaterAnimate(nowMin, nowMax, nowDesc);
 }
 
-
-
 function temperatureNowAnimate(min, max, desc) {
 	document.getElementById('now').style.display = 'block';
-	document.querySelectorAll('#now .low-temp h4')[0].style.display = 'block';
-	document.querySelectorAll('#now .high-temp h4')[0].style.display = 'block';
-	document.querySelectorAll('#now .low-temp h4')[0].innerHTML = min + "&#176;";
-	document.querySelectorAll('#now .high-temp h4')[0].innerHTML = max + "&#176;";
+	document.querySelectorAll('#now .high-temp')[0].style.display = 'block';
+	document.querySelectorAll('#now .low-temp h4')[0].innerHTML = min + '&#176;';
+	document.querySelectorAll('#now .high-temp h4')[0].innerHTML = max + '&#176;';
 	document.querySelectorAll('#now .description')[0].innerHTML = desc;
 	document.querySelectorAll('#now img')[0].src = displayPicture(desc);
 	TweenMax.from(document.getElementById('now'), 1, {delay: 3, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
+	window.setInterval(() => {temperatureNowLoop();}, 1000);
 }
+
+function temperatureNowLoop() {
+	TweenMax.to(document.querySelectorAll('#now .high-temp'), 1, {delay: 4, ease: Power4.easeOut, opacity: 0,	marginTop: '-10px'});
+	window.setTimeout(() => {
+		document.querySelectorAll('#now .high-temp')[0].style.display = 'none';
+		document.querySelectorAll('#now .low-temp')[0].style.display = 'block';
+	}, 5000);
+	TweenMax.from(document.querySelectorAll('#now .low-temp'), 1, {delay: 6, ease: Power4.easeOut, opacity: 0,	marginBottom: '-10px'});
+	// TweenMax.to(document.querySelectorAll('#now .low-temp'), 1, {delay: 4, ease: Power4.easeOut, opacity: 0,	marginTop: '-10px'});
+	// window.setTimeout(() => {
+	// 	document.querySelectorAll('#now .low-temp')[0].style.display = 'none';
+	// 	document.querySelectorAll('#now .high-temp')[0].style.display = 'block';
+	// 	temperatureNowLoop();
+	// }, 5000);
+}
+	// document.querySelectorAll('#now .high-temp')[0].style.display = 'block';
 
 function temperatureLaterAnimate(min, max, desc) {
 	document.getElementById('later').style.display = 'block';
-	document.querySelectorAll('#later .low-temp h4')[0].style.display = 'block';
-	document.querySelectorAll('#later .high-temp h4')[0].style.display = 'block';
-	document.querySelectorAll('#later .low-temp h4')[0].innerHTML = min + "&#176;";
-	document.querySelectorAll('#later .high-temp h4')[0].innerHTML = max + "&#176;";
+	document.querySelectorAll('#later .high-temp')[0].style.display = 'block';
+	document.querySelectorAll('#later .low-temp h4')[0].innerHTML = min + '&#176;';
+	document.querySelectorAll('#later .high-temp h4')[0].innerHTML = max + '&#176;';
 	document.querySelectorAll('#later .description')[0].innerHTML = desc;
 	document.querySelectorAll('#later img')[0].src = displayPicture(desc);
 	TweenMax.from(document.getElementById('later'), 1, {delay: 4, ease: Power4.easeOut, opacity: 0,	marginTop: '-40px'});
+	// temperatureLaterLoop();
 }
 
 function displayPicture(desc) {
@@ -162,7 +176,7 @@ function getWeather (lat, long) {
 			const data = JSON.parse(request.responseText);
 			console.log(data);
 			resultAnimate(data);	
-			temperaturesAnimate(data);
+			temperatureTilesShow(data);
 		} else {
 			resultAnimate(null);
 		}
