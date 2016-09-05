@@ -103,7 +103,7 @@ header {
 	@include span-columns(12);
 	text-align: center;
 	padding: 10vh 0 0;
-	@media (min-height: 800px) {
+	@media (min-height: 600px) {
 		padding: 20vh 0 0;
 	}
 }
@@ -121,7 +121,7 @@ header {
 		@include span-columns(3);
 	}
 	@media (min-height: 600px) {
-		padding-top: 15vh;
+		padding-top: 10vh;
 	}
 	img {
 		width: 40px;
@@ -131,7 +131,7 @@ header {
 	}
 	h4 {
 		font-weight: normal;
-		font-size: 12px;
+		font-size: 14px;
 	}
 	.description {
 		font-size: 18px;
@@ -140,19 +140,10 @@ header {
 		}
 	}
 	.temp {
-		display: none;
-		width: 80px;
-		margin: 0 auto;
-		p {
-			font-size: 12px;
-			float: left;
-			margin: 0;
-		}
-		h4 {
-			font-weight: 900;
-			font-size: 18px;
-			float: right;
-			margin: -4px 0 0;
+		font-size: 24px;
+		margin: 10px;
+		@include media($lg) {
+			font-size: 36px;
 		}
 	} 
 }
